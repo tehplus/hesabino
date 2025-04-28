@@ -1,0 +1,90 @@
+/* استایل‌های بخش موجودی */
+.stock-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    background: #f8f9fa;
+}
+
+.stock-status.text-success {
+    background: #d1e7dd;
+    color: #0a3622;
+}
+
+.stock-status.text-warning {
+    background: #fff3cd;
+    color: #664d03;
+}
+
+.stock-status.text-danger {
+    background: #f8d7da;
+    color: #58151c;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
+    position: relative;
+    padding-right: 1rem;
+}
+
+.section-title:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 1rem;
+    background: #3498db;
+    border-radius: 2px;
+}
+
+.warehouse-section,
+.order-settings,
+.suppliers-section {
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.supplier-row {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.unit-label {
+    min-width: 60px;
+    justify-content: center;
+}
+
+.form-floating > .form-control {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+    height: calc(3.5rem + 2px);
+}
+
+.form-floating > label {
+    padding: 1rem 0.75rem;
+}
+
+/* انیمیشن‌ها */
+.supplier-row {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
