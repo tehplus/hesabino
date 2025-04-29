@@ -1,194 +1,108 @@
-<?php
-/**
- * قالب فوتر
- * 
- * @package HesabinoAccounting
- * @version 1.0.0
- */
-
-// جلوگیری از دسترسی مستقیم
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
-?>
-    </main>
-
-    <!-- فوتر -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <img src="<?php echo asset('images/logo-light.png'); ?>" alt="<?php echo SITE_NAME; ?>" class="mb-4" style="height: 40px;">
-                    <p>سیستم حسابداری آنلاین برای مدیریت هوشمند امور مالی کسب و کارها</p>
-                    <div class="mt-4">
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-telegram fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <h5 class="text-white mb-4">دسترسی سریع</h5>
-                    <ul class="list-unstyled footer-links">
-                        <li><a href="<?php echo url(); ?>">صفحه اصلی</a></li>
-                        <li><a href="<?php echo url('about'); ?>">درباره ما</a></li>
-                        <li><a href="<?php echo url('contact'); ?>">تماس با ما</a></li>
-                        <li><a href="<?php echo url('blog'); ?>">وبلاگ</a></li>
-                        <li><a href="<?php echo url('pricing'); ?>">تعرفه‌ها</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <h5 class="text-white mb-4">خدمات</h5>
-                    <ul class="list-unstyled footer-links">
-                        <li><a href="<?php echo url('invoicing'); ?>">صدور فاکتور</a></li>
-                        <li><a href="<?php echo url('accounting'); ?>">حسابداری</a></li>
-                        <li><a href="<?php echo url('inventory'); ?>">انبارداری</a></li>
-                        <li><a href="<?php echo url('reports'); ?>">گزارش‌گیری</a></li>
-                        <li><a href="<?php echo url('api'); ?>">API</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h5 class="text-white mb-4">خبرنامه</h5>
-                    <p>برای اطلاع از آخرین اخبار و بروزرسانی‌ها در خبرنامه ما عضو شوید</p>
-                    <form class="newsletter-form mt-4" id="newsletterForm">
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="ایمیل خود را وارد کنید" required>
-                            <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <hr class="mt-5 mb-4">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">
-                        &copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. تمامی حقوق محفوظ است.
-                    </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item">
-                            <a href="<?php echo url('terms'); ?>">قوانین و مقررات</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="<?php echo url('privacy'); ?>">حریم خصوصی</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="<?php echo url('faq'); ?>">سوالات متداول</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top -->
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </a>
-
-    <!-- اسکریپت‌های ضروری -->
+    <!-- اسکریپت‌های اصلی -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
     
-    <!-- اسکریپت‌های سفارشی -->
-    <script src="<?php echo asset('js/app.js'); ?>"></script>
-    
-    <!-- اسکریپت‌های اختصاصی صفحه -->
-    <?php if (isset($pageScripts)): ?>
-        <?php foreach ($pageScripts as $script): ?>
-            <script src="<?php echo asset('js/' . $script); ?>"></script>
-        <?php endforeach; ?>
+    <?php if (isset($page) && in_array($page, ['add-product', 'edit-product'])): ?>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <?php endif; ?>
 
     <script>
-        // تنظیمات AOS
-        AOS.init({
-            duration: 800,
-            once: true
+    // این اسکریپت فقط یک بار تعریف می‌شود
+    const backToTop = document.createElement('button');
+    backToTop.id = 'back-to-top';
+    backToTop.innerHTML = '<i class="bi bi-arrow-up"></i>';
+    document.body.appendChild(backToTop);
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    };
+
+    backToTop.addEventListener('click', function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+
+    <?php if (isset($page) && in_array($page, ['add-product', 'edit-product'])): ?>
+    $(document).ready(function() {
+        // راه‌اندازی Select2
+        $('.select2').select2({
+            theme: 'bootstrap-5',
+            dir: 'rtl'
         });
 
-        // نمایش دکمه برگشت به بالا
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
+        // پیکربندی Dropzone
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("#productImages", {
+            url: "upload.php",
+            acceptedFiles: "image/*",
+            maxFilesize: 2,
+            maxFiles: 5,
+            addRemoveLinks: true,
+            dictDefaultMessage: "فایل‌ها را اینجا بکشید و رها کنید یا کلیک کنید",
+            dictRemoveFile: "حذف فایل",
+            success: function(file, response) {
+                if (response.success) {
+                    var uploadedFiles = JSON.parse($("#uploadedFiles").val() || '[]');
+                    uploadedFiles.push(response.filePath);
+                    $("#uploadedFiles").val(JSON.stringify(uploadedFiles));
+                    
+                    // نمایش پیام موفقیت با SweetAlert2
+                    Swal.fire({
+                        title: 'موفقیت',
+                        text: 'فایل با موفقیت آپلود شد',
+                        icon: 'success',
+                        confirmButtonText: 'تایید'
+                    });
+                }
+            },
+            error: function(file, response) {
+                // نمایش پیام خطا با SweetAlert2
+                Swal.fire({
+                    title: 'خطا',
+                    text: 'خطا در آپلود فایل',
+                    icon: 'error',
+                    confirmButtonText: 'تایید'
+                });
             }
         });
+    });
+    <?php endif; ?>
+    </script>
 
-        // اسکرول نرم به بالای صفحه
-        backToTop.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // فرم خبرنامه
-        const newsletterForm = document.getElementById('newsletterForm');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = newsletterForm.querySelector('input[type="email"]').value;
-                
-                // ارسال ایمیل به سرور
-                fetch('<?php echo url("api/newsletter/subscribe"); ?>', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'تبریک!',
-                            text: 'ایمیل شما با موفقیت در خبرنامه ثبت شد.',
-                            confirmButtonText: 'باشه'
-                        });
-                        newsletterForm.reset();
-                    } else {
-                        throw new Error(data.message);
-                    }
-                })
-                .catch(error => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'خطا!',
-                        text: error.message || 'مشکلی در ثبت ایمیل پیش آمد. لطفاً دوباره تلاش کنید.',
-                        confirmButtonText: 'باشه'
-                    });
-                });
-            });
-        }
-
-        // تأیید حذف با SweetAlert2
-        document.querySelectorAll('.delete-form').forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const message = form.querySelector('button[type="submit"]').dataset.confirm;
-                
-                Swal.fire({
-                    title: 'آیا مطمئن هستید؟',
-                    text: message,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'بله، حذف شود',
-                    cancelButtonText: 'انصراف'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-                });
-            });
+    <?php
+    // نمایش پیام‌های موفقیت
+    if (isset($_SESSION['success_message'])): ?>
+    <script>
+        Swal.fire({
+            title: 'موفقیت',
+            text: '<?php echo $_SESSION['success_message']; ?>',
+            icon: 'success',
+            confirmButtonText: 'تایید'
         });
     </script>
+    <?php 
+    unset($_SESSION['success_message']);
+    endif; 
+    
+    // نمایش پیام‌های خطا
+    if (isset($_SESSION['error_message'])): ?>
+    <script>
+        Swal.fire({
+            title: 'خطا',
+            text: '<?php echo $_SESSION['error_message']; ?>',
+            icon: 'error',
+            confirmButtonText: 'تایید'
+        });
+    </script>
+    <?php 
+    unset($_SESSION['error_message']);
+    endif; 
+    ?>
 </body>
 </html>

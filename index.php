@@ -159,7 +159,7 @@ if (!defined('NO_TEMPLATE')) {
     if (file_exists(BASEPATH . '/templates/' . $route . '.php')) {
         require_once BASEPATH . '/templates/' . $route . '.php';
     }
-    require_once BASEPATH . '/templates/footer.php';
+    
 }
 ?>
 <!DOCTYPE html>
