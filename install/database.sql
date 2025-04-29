@@ -90,84 +90,23 @@ CREATE TABLE IF NOT EXISTS `hb_user_tokens` (
     CONSTRAINT `user_tokens_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
--- جدول تأییدیه‌های کاربر
-CREATE TABLE IF NOT EXISTS `hb_user_verifications` (
+-- جدول دسته‌بندی محصولات (باید قبل از محصولات ایجاد شود)
+CREATE TABLE IF NOT EXISTS `hb_product_categories` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
-    `code` varchar(10) NOT NULL,
-    `type` enum('email','mobile') NOT NULL,
-    `used` tinyint(1) NOT NULL DEFAULT 0,
-    `created_at` datetime NOT NULL,
-    `expires` datetime NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `user_id` (`user_id`),
-    KEY `code` (`code`),
-    CONSTRAINT `user_verifications_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
-
--- جدول بازیابی رمز عبور
-CREATE TABLE IF NOT EXISTS `hb_password_resets` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
-    `token` varchar(64) NOT NULL,
-    `used` tinyint(1) NOT NULL DEFAULT 0,
-    `created_at` datetime NOT NULL,
-    `expires` datetime NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `token` (`token`),
-    KEY `user_id` (`user_id`),
-    CONSTRAINT `password_resets_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
-
--- جدول لاگ ورود
-CREATE TABLE IF NOT EXISTS `hb_login_logs` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
-    `ip` varchar(45) NOT NULL,
-    `user_agent` varchar(255) NOT NULL,
-    `created_at` datetime NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `user_id` (`user_id`),
-    CONSTRAINT `login_logs_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
-
--- جدول تلاش‌های ناموفق ورود
-CREATE TABLE IF NOT EXISTS `hb_login_attempts` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
-    `ip` varchar(45) NOT NULL,
-    `user_agent` varchar(255) NOT NULL,
-    `created_at` datetime NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `user_id` (`user_id`),
-    CONSTRAINT `login_attempts_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
-
--- جدول مشتریان
-CREATE TABLE IF NOT EXISTS `hb_customers` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
+    `parent_id` int(11) DEFAULT NULL,
     `name` varchar(100) NOT NULL,
-    `company` varchar(100) DEFAULT NULL,
-    `national_code` varchar(10) DEFAULT NULL,
-    `economic_code` varchar(12) DEFAULT NULL,
-    `registration_number` varchar(20) DEFAULT NULL,
-    `phone` varchar(20) DEFAULT NULL,
-    `mobile` varchar(11) DEFAULT NULL,
-    `email` varchar(100) DEFAULT NULL,
-    `website` varchar(100) DEFAULT NULL,
-    `province` varchar(50) DEFAULT NULL,
-    `city` varchar(50) DEFAULT NULL,
-    `address` text DEFAULT NULL,
-    `postal_code` varchar(10) DEFAULT NULL,
+    `slug` varchar(100) NOT NULL,
     `description` text DEFAULT NULL,
     `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
     `created_at` datetime NOT NULL,
     `updated_at` datetime NOT NULL,
     PRIMARY KEY (`id`),
-    KEY `user_id` (`user_id`),
+    UNIQUE KEY `user_slug` (`user_id`,`slug`),
+    KEY `parent_id` (`parent_id`),
     KEY `status` (`status`),
-    CONSTRAINT `customers_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
+    CONSTRAINT `product_categories_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `product_categories_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `hb_product_categories` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 -- جدول محصولات
@@ -198,23 +137,31 @@ CREATE TABLE IF NOT EXISTS `hb_products` (
     CONSTRAINT `products_category_id` FOREIGN KEY (`category_id`) REFERENCES `hb_product_categories` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
--- جدول دسته‌بندی محصولات
-CREATE TABLE IF NOT EXISTS `hb_product_categories` (
+-- جدول مشتریان
+CREATE TABLE IF NOT EXISTS `hb_customers` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
-    `parent_id` int(11) DEFAULT NULL,
     `name` varchar(100) NOT NULL,
-    `slug` varchar(100) NOT NULL,
+    `company` varchar(100) DEFAULT NULL,
+    `national_code` varchar(10) DEFAULT NULL,
+    `economic_code` varchar(12) DEFAULT NULL,
+    `registration_number` varchar(20) DEFAULT NULL,
+    `phone` varchar(20) DEFAULT NULL,
+    `mobile` varchar(11) DEFAULT NULL,
+    `email` varchar(100) DEFAULT NULL,
+    `website` varchar(100) DEFAULT NULL,
+    `province` varchar(50) DEFAULT NULL,
+    `city` varchar(50) DEFAULT NULL,
+    `address` text DEFAULT NULL,
+    `postal_code` varchar(10) DEFAULT NULL,
     `description` text DEFAULT NULL,
     `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
     `created_at` datetime NOT NULL,
     `updated_at` datetime NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `user_slug` (`user_id`,`slug`),
-    KEY `parent_id` (`parent_id`),
+    KEY `user_id` (`user_id`),
     KEY `status` (`status`),
-    CONSTRAINT `product_categories_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `product_categories_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `hb_product_categories` (`id`) ON DELETE SET NULL
+    CONSTRAINT `customers_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 -- جدول فاکتورها
@@ -305,6 +252,9 @@ CREATE TABLE IF NOT EXISTS `hb_user_settings` (
     CONSTRAINT `user_settings_user_id` FOREIGN KEY (`user_id`) REFERENCES `hb_users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
+-- فعال کردن foreign key checks
+SET FOREIGN_KEY_CHECKS=1;
+
 -- درج داده‌های پیش‌فرض
 
 -- نقش‌های پیش‌فرض
@@ -356,13 +306,9 @@ INSERT INTO `hb_permissions` (`name`, `display_name`, `description`, `created_at
 ('payments.edit', 'ویرایش پرداخت', 'ویرایش پرداخت', NOW(), NOW()),
 ('payments.delete', 'حذف پرداخت', 'حذف پرداخت', NOW(), NOW()),
 
--- مدیریت گزارش‌ها
+-- گزارشات
 ('reports.view', 'مشاهده گزارش‌ها', 'مشاهده گزارش‌های سیستم', NOW(), NOW()),
-('reports.export', 'خروجی گزارش‌ها', 'دریافت خروجی از گزارش‌ها', NOW(), NOW()),
-
--- تنظیمات
-('settings.view', 'مشاهده تنظیمات', 'مشاهده تنظیمات سیستم', NOW(), NOW()),
-('settings.edit', 'ویرایش تنظیمات', 'ویرایش تنظیمات سیستم', NOW(), NOW());
+('reports.export', 'خروجی گزارش‌ها', 'دریافت خروجی از گزارش‌ها', NOW(), NOW());
 
 -- اختصاص دسترسی‌ها به نقش admin
 INSERT INTO `hb_role_permissions` (`role_id`, `permission_id`, `created_at`)
@@ -391,6 +337,3 @@ WHERE `name` IN (
     'payments.create',
     'reports.view'
 );
-
--- فعال کردن foreign key checks
-SET FOREIGN_KEY_CHECKS=1;

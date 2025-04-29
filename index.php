@@ -32,7 +32,10 @@ if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.
 require_once BASEPATH . '/includes/functions.php';
 require_once BASEPATH . '/includes/db.php';
 require_once BASEPATH . '/includes/auth.php';
-
+// تنظیمات session
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_secure', 0); // در حالت توسعه 0 و در حالت تولید 1
 // شروع session
 session_start();
 
