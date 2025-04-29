@@ -5,7 +5,15 @@
  * @package HesabinoAccounting
  * @version 1.0.0
  */
-
+// اگر کاربر لاگین کرده باشد، ریدایرکت به داشبورد
+if (isset($_SESSION['user_id'])) {
+    header('Location: dashboard');
+    exit;
+}
+$auth = Auth::getInstance();
+$error = '';
+$success = '';
+$formData = [];
 // تنظیمات اولیه
 define('BASEPATH', __DIR__);
 require_once 'config/config.php';
@@ -16,16 +24,9 @@ require_once 'includes/functions.php';
 // شروع جلسه
 session_start();
 
-// اگر کاربر لاگین کرده باشد، ریدایرکت به داشبورد
-if (isset($_SESSION['user_id'])) {
-    header('Location: dashboard');
-    exit;
-}
 
-$auth = Auth::getInstance();
-$error = '';
-$success = '';
-$formData = [];
+
+
 
 // پردازش فرم ثبت‌نام
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
