@@ -4436,3 +4436,97 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:53:16 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:06 Asia/Tehran] PHP Fatal error:  Uncaught Error: Undefined constant "SITE_NAME" in C:\xampp\htdocs\hesabino\index.php:145
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 145
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/errors/404.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 116
+[29-Apr-2025 13:55:59 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/errors/404.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:116
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 116
