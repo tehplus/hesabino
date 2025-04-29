@@ -4,6 +4,8 @@
  * 
  * @package HesabinoAccounting
  * @version 1.0.0
+ * @author TehPlus
+ * @link https://github.com/tehplus/hesabino
  */
 
 // تعریف مسیر پایه
@@ -15,11 +17,31 @@ if (!file_exists(BASEPATH . '/config/config.php')) {
     exit;
 }
 
-// لود کردن تنظیمات
+// تنظیم منطقه زمانی و کاراکتر ست
+date_default_timezone_set('Asia/Tehran');
+mb_internal_encoding('UTF-8');
+header('Content-Type: text/html; charset=utf-8');
+
+// تنظیمات session قبل از شروع session
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_secure', 0); // در حالت توسعه 0 و در حالت تولید 1
+ini_set('session.gc_maxlifetime', 7200);
+ini_set('session.cookie_lifetime', 7200);
+
+// شروع session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// لود کردن تنظیمات و فایل‌های مورد نیاز
 require_once BASEPATH . '/config/config.php';
+require_once BASEPATH . '/includes/functions.php';
+require_once BASEPATH . '/includes/db.php';
+require_once BASEPATH . '/includes/auth.php';
 
 // تنظیم error reporting براساس محیط
-if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.localhost') {
+if (isDevelopment()) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -28,32 +50,8 @@ if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.
     error_reporting(0);
 }
 
-// تنظیمات session
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 0); // در حالت توسعه 0 و در حالت تولید 1
-ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
-session_set_cookie_params([
-    'lifetime' => SESSION_LIFETIME,
-    'path' => '/',
-    'domain' => '',
-    'secure' => false,
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-
-
-// لود کردن فایل‌های مورد نیاز
-require_once BASEPATH . '/includes/functions.php';
-require_once BASEPATH . '/includes/db.php';
-require_once BASEPATH . '/includes/auth.php';
-
-
-session_start();
-
-// تنظیم session lifetime
-
-session_set_cookie_params(SESSION_LIFETIME);
+// ایجاد نمونه از کلاس Auth
+$auth = Auth::getInstance();
 
 // دریافت مسیر درخواستی
 $route = $_GET['route'] ?? 'home';
@@ -109,7 +107,7 @@ $routes = [
     'api/users' => ['file' => 'api/users.php', 'auth' => true],
     'api/products' => ['file' => 'api/products.php', 'auth' => true],
     'api/customers' => ['file' => 'api/customers.php', 'auth' => true],
-    'api/invoices' => ['file' => 'api/invoices.php', 'auth' => true],
+    'api/invoices' => ['file' => 'api/invoices.php', 'auth' => true]
 ];
 
 // بررسی وجود مسیر
@@ -121,24 +119,48 @@ if (!isset($routes[$route])) {
 
 // دریافت اطلاعات مسیر
 $route_info = $routes[$route];
-$auth = Auth::getInstance();
 
 // بررسی نیاز به احراز هویت
 if ($route_info['auth'] && !$auth->isLoggedIn()) {
     $_SESSION['redirect_url'] = $route;
-    header('Location: ' . SITE_URL . 'login');
+    header('Location: ' . url('login'));
     exit;
 }
 
 // بررسی دسترسی ادمین
-if (isset($route_info['admin']) && $route_info['admin'] && !$auth->hasPermission('admin')) {
+if (isset($route_info['admin']) && $route_info['admin'] && !$auth->hasRole('admin')) {
     http_response_code(403);
     require_once BASEPATH . '/pages/errors/403.php';
     exit;
 }
 
+// بررسی وجود فایل مسیر
+if (!file_exists(BASEPATH . '/' . $route_info['file'])) {
+    http_response_code(404);
+    require_once BASEPATH . '/pages/errors/404.php';
+    exit;
+}
+
+// تنظیم متغیرهای پیش‌فرض قالب
+$pageTitle = SITE_NAME;
+$pageDescription = SITE_DESC;
+$pageKeywords = '';
+$pageImage = asset('images/og-image.jpg');
+$pageUrl = url($route);
+$pageStyles = [];
+$pageScripts = [];
+
 // اجرای فایل مربوطه
 require_once BASEPATH . '/' . $route_info['file'];
+
+// اجرای قالب اصلی
+if (!defined('NO_TEMPLATE')) {
+    require_once BASEPATH . '/templates/header.php';
+    if (file_exists(BASEPATH . '/templates/' . $route . '.php')) {
+        require_once BASEPATH . '/templates/' . $route . '.php';
+    }
+    require_once BASEPATH . '/templates/footer.php';
+}
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">

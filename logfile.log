@@ -2295,3 +2295,8 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\hesabino\index.php on line 118
+[29-Apr-2025 12:13:42 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 706
+[29-Apr-2025 12:13:42 Asia/Tehran] PHP Fatal error:  Uncaught Error: Call to undefined function isDevelopment() in C:\xampp\htdocs\hesabino\index.php:44
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 44
