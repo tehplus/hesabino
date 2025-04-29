@@ -14,18 +14,6 @@ $auth = Auth::getInstance();
 $error = '';
 $success = '';
 $formData = [];
-// تنظیمات اولیه
-define('BASEPATH', __DIR__);
-require_once 'config/config.php';
-require_once 'includes/db.php';
-require_once 'includes/auth.php';
-require_once 'includes/functions.php';
-
-// شروع جلسه
-session_start();
-
-
-
 
 
 // پردازش فرم ثبت‌نام

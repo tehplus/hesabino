@@ -1,6 +1,6 @@
 <?php
 /**
- * کلاس مدیریت پایگاه داده
+ * کلاس ارتباط با پایگاه داده
  * 
  * @package HesabinoAccounting
  * @version 1.0.0
@@ -13,12 +13,14 @@ if (!defined('BASEPATH')) {
 
 class Database {
     private static $instance = null;
-    private $conn = null;
-    private $stmt = null;
+    private $connection;
     private $transactions = 0;
+    private $query_count = 0;
+    private $queries = [];
+    private $execution_time = 0;
     
     /**
-     * سازنده کلاس و ایجاد اتصال به دیتابیس
+     * سازنده کلاس
      */
     private function __construct() {
         try {
@@ -30,17 +32,25 @@ class Database {
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . DB_CHARSET . " COLLATE " . DB_CHARSET . "_persian_ci"
             ];
             
-            $this->conn = new PDO($dsn, DB_USER, DB_PASS, $options);
-            
+            $this->connection = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
             // لاگ خطا
-            error_log($e->getMessage());
-            throw new Exception('خطا در اتصال به پایگاه داده');
+            error_log("Database Connection Error: " . $e->getMessage());
+            
+            // نمایش خطای مناسب
+            die("خطا در اتصال به پایگاه داده. لطفاً با مدیر سیستم تماس بگیرید.");
         }
     }
     
     /**
+     * جلوگیری از clone شدن
+     */
+    private function __clone() {}
+    
+    /**
      * دریافت نمونه کلاس (Singleton)
+     * 
+     * @return Database
      */
     public static function getInstance() {
         if (self::$instance === null) {
@@ -50,45 +60,66 @@ class Database {
     }
     
     /**
-     * اجرای کوئری
+     * اجرای کوئری با پارامترها
      * 
      * @param string $query کوئری SQL
      * @param array $params پارامترها
      * @return PDOStatement
      */
-    public function query($query, $params = []) {
+    private function execute($query, $params = []) {
+        $start = microtime(true);
+        
         try {
-            $this->stmt = $this->conn->prepare($query);
-            $this->stmt->execute($params);
-            return $this->stmt;
+            $statement = $this->connection->prepare($query);
+            $statement->execute($params);
             
+            // ذخیره اطلاعات کوئری
+            $this->query_count++;
+            $this->queries[] = [
+                'query' => $query,
+                'params' => $params,
+                'time' => microtime(true) - $start
+            ];
+            $this->execution_time += microtime(true) - $start;
+            
+            return $statement;
         } catch (PDOException $e) {
             // لاگ خطا
-            error_log($e->getMessage());
-            throw new Exception('خطا در اجرای کوئری');
+            error_log("Database Query Error: " . $e->getMessage() . "\nQuery: " . $query . "\nParams: " . print_r($params, true));
+            
+            // ریست تراکنش در صورت وجود خطا
+            if ($this->transactions > 0) {
+                $this->connection->rollBack();
+                $this->transactions = 0;
+            }
+            
+            // پرتاب خطا
+            throw $e;
         }
     }
     
     /**
-     * دریافت یک ردیف
+     * دریافت یک رکورد
      * 
      * @param string $query کوئری SQL
      * @param array $params پارامترها
      * @return array|false
      */
     public function getRow($query, $params = []) {
-        return $this->query($query, $params)->fetch();
+        $statement = $this->execute($query, $params);
+        return $statement->fetch();
     }
     
     /**
-     * دریافت همه ردیف‌ها
+     * دریافت چند رکورد
      * 
      * @param string $query کوئری SQL
      * @param array $params پارامترها
      * @return array
      */
     public function getRows($query, $params = []) {
-        return $this->query($query, $params)->fetchAll();
+        $statement = $this->execute($query, $params);
+        return $statement->fetchAll();
     }
     
     /**
@@ -99,7 +130,20 @@ class Database {
      * @return mixed
      */
     public function getValue($query, $params = []) {
-        return $this->query($query, $params)->fetchColumn();
+        $statement = $this->execute($query, $params);
+        return $statement->fetchColumn();
+    }
+    
+    /**
+     * دریافت یک ستون
+     * 
+     * @param string $query کوئری SQL
+     * @param array $params پارامترها
+     * @return array
+     */
+    public function getColumn($query, $params = []) {
+        $statement = $this->execute($query, $params);
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
     
     /**
@@ -107,26 +151,17 @@ class Database {
      * 
      * @param string $table نام جدول
      * @param array $data داده‌ها
-     * @return int
+     * @return int|false
      */
     public function insert($table, $data) {
-        try {
-            $fields = array_keys($data);
-            $values = array_values($data);
-            $placeholders = array_fill(0, count($fields), '?');
-            
-            $query = "INSERT INTO " . DB_PREFIX . $table . " 
-                     (" . implode(', ', $fields) . ") 
-                     VALUES (" . implode(', ', $placeholders) . ")";
-            
-            $this->query($query, $values);
-            return $this->conn->lastInsertId();
-            
-        } catch (PDOException $e) {
-            // لاگ خطا
-            error_log($e->getMessage());
-            throw new Exception('خطا در درج اطلاعات');
-        }
+        $fields = array_keys($data);
+        $values = array_values($data);
+        $placeholders = str_repeat('?,', count($fields) - 1) . '?';
+        
+        $query = "INSERT INTO {$table} (" . implode(',', $fields) . ") VALUES ({$placeholders})";
+        $statement = $this->execute($query, $values);
+        
+        return $this->connection->lastInsertId();
     }
     
     /**
@@ -136,28 +171,17 @@ class Database {
      * @param array $data داده‌ها
      * @param string $where شرط
      * @param array $params پارامترهای شرط
-     * @return int
+     * @return bool
      */
     public function update($table, $data, $where, $params = []) {
-        try {
-            $fields = array_keys($data);
-            $values = array_values($data);
-            $set = array_map(function($field) {
-                return "$field = ?";
-            }, $fields);
-            
-            $query = "UPDATE " . DB_PREFIX . $table . " 
-                     SET " . implode(', ', $set) . " 
-                     WHERE " . $where;
-            
-            $this->query($query, array_merge($values, $params));
-            return $this->stmt->rowCount();
-            
-        } catch (PDOException $e) {
-            // لاگ خطا
-            error_log($e->getMessage());
-            throw new Exception('خطا در بروزرسانی اطلاعات');
-        }
+        $fields = array_keys($data);
+        $values = array_values($data);
+        
+        $set = implode('=?,', $fields) . '=?';
+        $query = "UPDATE {$table} SET {$set} WHERE {$where}";
+        
+        $statement = $this->execute($query, array_merge($values, $params));
+        return $statement->rowCount() > 0;
     }
     
     /**
@@ -166,93 +190,88 @@ class Database {
      * @param string $table نام جدول
      * @param string $where شرط
      * @param array $params پارامترهای شرط
-     * @return int
+     * @return bool
      */
     public function delete($table, $where, $params = []) {
-        try {
-            $query = "DELETE FROM " . DB_PREFIX . $table . " WHERE " . $where;
-            $this->query($query, $params);
-            return $this->stmt->rowCount();
-            
-        } catch (PDOException $e) {
-            // لاگ خطا
-            error_log($e->getMessage());
-            throw new Exception('خطا در حذف اطلاعات');
-        }
+        $query = "DELETE FROM {$table} WHERE {$where}";
+        $statement = $this->execute($query, $params);
+        return $statement->rowCount() > 0;
     }
     
     /**
      * شروع تراکنش
      */
     public function beginTransaction() {
-        if ($this->transactions === 0) {
-            $this->conn->beginTransaction();
+        if ($this->transactions == 0) {
+            $this->connection->beginTransaction();
         }
         $this->transactions++;
     }
     
     /**
-     * تایید تراکنش
+     * تأیید تراکنش
      */
     public function commit() {
         $this->transactions--;
-        if ($this->transactions === 0) {
-            $this->conn->commit();
+        if ($this->transactions == 0) {
+            $this->connection->commit();
         }
     }
     
     /**
      * بازگشت تراکنش
      */
-    public function rollback() {
+    public function rollBack() {
         if ($this->transactions > 0) {
+            $this->connection->rollBack();
             $this->transactions = 0;
-            $this->conn->rollback();
         }
     }
     
     /**
-     * دریافت آخرین ID درج شده
-     * 
-     * @return string
-     */
-    public function lastInsertId() {
-        return $this->conn->lastInsertId();
-    }
-    
-    /**
-     * دریافت تعداد رکوردهای تغییر یافته
+     * دریافت تعداد کوئری‌ها
      * 
      * @return int
      */
-    public function rowCount() {
-        return $this->stmt->rowCount();
+    public function getQueryCount() {
+        return $this->query_count;
     }
     
     /**
-     * دریافت اتصال PDO
+     * دریافت لیست کوئری‌ها
      * 
-     * @return PDO
+     * @return array
      */
-    public function getConnection() {
-        return $this->conn;
+    public function getQueries() {
+        return $this->queries;
     }
     
     /**
-     * بستن اتصال
+     * دریافت زمان اجرای کوئری‌ها
+     * 
+     * @return float
      */
-    public function __destruct() {
-        $this->stmt = null;
-        $this->conn = null;
+    public function getExecutionTime() {
+        return $this->execution_time;
     }
     
     /**
-     * جلوگیری از کپی شدن
+     * فرار از کاراکترهای خاص
+     * 
+     * @param string $value مقدار ورودی
+     * @return string
      */
-    private function __clone() {}
+    public function escape($value) {
+        return $this->connection->quote($value);
+    }
     
     /**
-     * جلوگیری از unserialize شدن
+     * اجرای مستقیم کوئری
+     * 
+     * @param string $query کوئری SQL
+     * @return bool|PDOStatement
      */
-    public function __wakeup() {} // تغییر از private به public
+    public function query($query) {
+        return $this->connection->query($query);
+    }
 }

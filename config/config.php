@@ -11,63 +11,40 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-// تنظیم منطقه زمانی
-date_default_timezone_set('Asia/Tehran');
-
-// نمایش خطاها در محیط توسعه
-if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.localhost') {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-} else {
-    ini_set('display_errors', 0);
-    error_reporting(0);
-}
-
-// تنظیمات پایه سایت
+// تنظیمات سایت
 define('SITE_NAME', 'حسابینو');
 define('SITE_DESC', 'سیستم حسابداری آنلاین');
-define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/hesabino/');
-define('ADMIN_EMAIL', 'admin@hesabino.com');
+define('SITE_URL', 'http://www.localhost/hesabino');
+define('SITE_EMAIL', 'info@hesabino.ir');
 
 // تنظیمات دیتابیس
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'pt_hesbino');
+define('DB_NAME', 'hesabino');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_CHARSET', 'utf8mb4');
 define('DB_PREFIX', 'hb_');
+define('DB_CHARSET', 'utf8mb4');
 
 // تنظیمات امنیتی
-define('HASH_COST', 12);
-define('SESSION_LIFETIME', 7200);
-define('CSRF_EXPIRY', 7200);
+define('HASH_COST', 10); // هزینه هش کردن رمز عبور
+define('CSRF_EXPIRY', 7200); // مدت زمان اعتبار توکن CSRF (2 ساعت)
 define('REMEMBER_COOKIE_NAME', 'hesabino_remember');
-define('REMEMBER_COOKIE_EXPIRY', 2592000);
-
-// تنظیمات آپلود
-define('UPLOAD_PATH', BASEPATH . '/uploads/');
-define('ALLOWED_TYPES', [
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-]);
-define('MAX_UPLOAD_SIZE', 10 * 1024 * 1024);
-
-// تنظیمات نمایش
-define('ITEMS_PER_PAGE', 20);
-define('DATE_FORMAT', 'Y/m/d');
-define('TIME_FORMAT', 'H:i:s');
-define('DATETIME_FORMAT', 'Y/m/d H:i:s');
-define('THOUSAND_SEPARATOR', ',');
-define('DECIMAL_SEPARATOR', '.');
+define('REMEMBER_COOKIE_EXPIRY', 2592000); // مدت زمان کوکی "مرا به خاطر بسپار" (30 روز)
+define('SESSION_LIFETIME', 7200); // مدت زمان session (2 ساعت)
 
 // تنظیمات ایمیل
-define('MAIL_FROM', 'noreply@hesabino.com');
+define('MAIL_FROM', SITE_EMAIL);
 define('MAIL_FROM_NAME', SITE_NAME);
-define('MAIL_REPLY_TO', 'support@hesabino.com');
+define('MAIL_REPLY_TO', SITE_EMAIL);
 
-return true;
+// تنظیمات آپلود
+define('UPLOAD_MAX_SIZE', 2 * 1024 * 1024); // حداکثر حجم فایل (2MB)
+define('UPLOAD_ALLOWED_TYPES', ['image/jpeg', 'image/png', 'image/gif']); // فرمت‌های مجاز
+define('UPLOAD_PATH', 'uploads'); // مسیر آپلود فایل‌ها
+
+// تنظیمات جداکننده‌های اعداد
+define('DECIMAL_SEPARATOR', '.'); // جداکننده اعشار
+define('THOUSAND_SEPARATOR', ','); // جداکننده هزارگان
+
+// نسخه برنامه
+define('APP_VERSION', '1.0.0');

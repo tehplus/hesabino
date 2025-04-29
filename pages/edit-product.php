@@ -505,6 +505,20 @@ function removeImage(button, filePath) {
     const uploadedFilesInput = document.getElementById('uploadedFiles');
     uploadedFilesInput.value = uploadedFilesInput.value.split(',').filter(file => file !== filePath).join(',');
 }
+
+function generateBarcode() {
+    const timestamp = new Date().getTime().toString().slice(-12);
+    document.querySelector('input[name="barcode"]').value = timestamp;
+}
+function savePriceList() {
+    const modal = document.getElementById('priceListModal');
+    const inputs = modal.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        const mainInput = document.querySelector(`input[name="${input.name}"]`);
+        if (mainInput) mainInput.value = input.value;
+    });
+    bootstrap.Modal.getInstance(modal).hide();
+}
 // پیکربندی Dropzone
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
