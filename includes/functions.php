@@ -1328,5 +1328,11 @@ function detectMimeType($content) {
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     return $finfo->buffer($content);
 }
-
+/**
+ * بررسی محیط توسعه
+ * @return bool
+ */
+function isDevelopment() {
+    return $_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.localhost';
+}
 // پایان فایل functions.php
