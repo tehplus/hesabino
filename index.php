@@ -1,90 +1,129 @@
 <?php
 /**
- * صفحه اصلی سیستم حسابداری
+ * فایل اصلی برنامه - نقطه ورودی تمام درخواست‌ها
  * 
  * @package HesabinoAccounting
  * @version 1.0.0
  */
 
-// تنظیمات اولیه
+// تعریف مسیر پایه
 define('BASEPATH', __DIR__);
-require_once 'config/config.php';
-require_once 'includes/functions.php';
-require_once 'includes/db.php';
-require_once 'includes/auth.php';
+
+// بررسی نصب بودن برنامه
+if (!file_exists(BASEPATH . '/config/config.php')) {
+    header('Location: install/index.php');
+    exit;
+}
+
+// لود کردن تنظیمات
+require_once BASEPATH . '/config/config.php';
+
+// تنظیم error reporting براساس محیط
+if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.localhost') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
+
+// لود کردن فایل‌های مورد نیاز
+require_once BASEPATH . '/includes/functions.php';
+require_once BASEPATH . '/includes/db.php';
+require_once BASEPATH . '/includes/auth.php';
 
 // شروع session
 session_start();
+
+// تنظیم session lifetime
+ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
+session_set_cookie_params(SESSION_LIFETIME);
+
+// دریافت مسیر درخواستی
 $route = $_GET['route'] ?? 'home';
 $route = rtrim($route, '/');
 
-
-// تعریف مسیرها
+// مسیریابی
 $routes = [
-    'home' => 'pages/home.php',
-    'login' => 'pages/login.php',
-    'register' => 'pages/register.php',
-    'dashboard' => 'pages/dashboard.php',
-    'forgot-password' => 'pages/forgot-password.php',
-    'reset-password' => 'pages/reset-password.php',
-    'verify-email' => 'pages/verify-email.php',
-    'logout' => 'pages/logout.php',
-    // مسیرهای پنل مدیریت
-    'admin' => 'pages/admin/index.php',
-    'admin/users' => 'pages/admin/users.php',
-    'admin/settings' => 'pages/admin/settings.php',
-    // مسیرهای حسابداری
-    'invoices' => 'pages/invoices/list.php',
-    'invoices/create' => 'pages/invoices/create.php',
-    'invoices/edit' => 'pages/invoices/edit.php',
-    'customers' => 'pages/customers/list.php',
-    'customers/create' => 'pages/customers/create.php',
-    'customers/edit' => 'pages/customers/edit.php',
-    'products' => 'pages/products/list.php',
-    'products/create' => 'pages/products/create.php',
-    'products/edit' => 'pages/products/edit.php',
-    // مسیرهای API
-    'api/auth' => 'api/auth.php',
-    'api/users' => 'api/users.php',
-    'api/invoices' => 'api/invoices.php',
+    // صفحات عمومی
+    'home' => ['file' => 'pages/home.php', 'auth' => false],
+    'login' => ['file' => 'pages/login.php', 'auth' => false],
+    'register' => ['file' => 'pages/register.php', 'auth' => false],
+    'forgot-password' => ['file' => 'pages/forgot-password.php', 'auth' => false],
+    'reset-password' => ['file' => 'pages/reset-password.php', 'auth' => false],
+    'verify-email' => ['file' => 'pages/verify-email.php', 'auth' => false],
+    'logout' => ['file' => 'pages/logout.php', 'auth' => true],
+    
+    // داشبورد و پروفایل
+    'dashboard' => ['file' => 'pages/dashboard.php', 'auth' => true],
+    'profile' => ['file' => 'pages/profile.php', 'auth' => true],
+    'settings' => ['file' => 'pages/settings.php', 'auth' => true],
+    
+    // مدیریت محصولات
+    'products' => ['file' => 'pages/products/index.php', 'auth' => true],
+    'products/create' => ['file' => 'pages/products/create.php', 'auth' => true],
+    'products/edit' => ['file' => 'pages/products/edit.php', 'auth' => true],
+    'products/delete' => ['file' => 'pages/products/delete.php', 'auth' => true],
+    
+    // مدیریت مشتریان
+    'customers' => ['file' => 'pages/customers/index.php', 'auth' => true],
+    'customers/create' => ['file' => 'pages/customers/create.php', 'auth' => true],
+    'customers/edit' => ['file' => 'pages/customers/edit.php', 'auth' => true],
+    'customers/delete' => ['file' => 'pages/customers/delete.php', 'auth' => true],
+    
+    // مدیریت فاکتورها
+    'invoices' => ['file' => 'pages/invoices/index.php', 'auth' => true],
+    'invoices/create' => ['file' => 'pages/invoices/create.php', 'auth' => true],
+    'invoices/edit' => ['file' => 'pages/invoices/edit.php', 'auth' => true],
+    'invoices/delete' => ['file' => 'pages/invoices/delete.php', 'auth' => true],
+    'invoices/print' => ['file' => 'pages/invoices/print.php', 'auth' => true],
+    
+    // گزارش‌ها
+    'reports/sales' => ['file' => 'pages/reports/sales.php', 'auth' => true],
+    'reports/customers' => ['file' => 'pages/reports/customers.php', 'auth' => true],
+    'reports/products' => ['file' => 'pages/reports/products.php', 'auth' => true],
+    
+    // پنل مدیریت
+    'admin' => ['file' => 'pages/admin/index.php', 'auth' => true, 'admin' => true],
+    'admin/users' => ['file' => 'pages/admin/users.php', 'auth' => true, 'admin' => true],
+    'admin/settings' => ['file' => 'pages/admin/settings.php', 'auth' => true, 'admin' => true],
+    
+    // API endpoints
+    'api/auth' => ['file' => 'api/auth.php', 'auth' => false],
+    'api/users' => ['file' => 'api/users.php', 'auth' => true],
+    'api/products' => ['file' => 'api/products.php', 'auth' => true],
+    'api/customers' => ['file' => 'api/customers.php', 'auth' => true],
+    'api/invoices' => ['file' => 'api/invoices.php', 'auth' => true],
 ];
 
 // بررسی وجود مسیر
 if (!isset($routes[$route])) {
-    // مسیر پیدا نشد - نمایش صفحه 404
     http_response_code(404);
-    require_once 'pages/errors/404.php';
+    require_once BASEPATH . '/pages/errors/404.php';
     exit;
 }
 
-// بررسی دسترسی‌ها
+// دریافت اطلاعات مسیر
+$route_info = $routes[$route];
 $auth = Auth::getInstance();
-$protected_routes = [
-    'dashboard',
-    'admin',
-    'invoices',
-    'customers',
-    'products'
-];
 
-// بررسی نیاز به لاگین
-if (in_array(explode('/', $route)[0], $protected_routes)) {
-    if (!$auth->isLoggedIn()) {
-        $_SESSION['redirect_url'] = $route;
-        header('Location: ' . SITE_URL . 'login');
-        exit;
-    }
-    
-    // بررسی دسترسی ادمین
-    if (strpos($route, 'admin/') === 0 && !$auth->hasPermission('admin')) {
-        http_response_code(403);
-        require_once 'pages/errors/403.php';
-        exit;
-    }
+// بررسی نیاز به احراز هویت
+if ($route_info['auth'] && !$auth->isLoggedIn()) {
+    $_SESSION['redirect_url'] = $route;
+    header('Location: ' . SITE_URL . 'login');
+    exit;
 }
 
-// اجرای فایل مربوط به مسیر
-require_once $routes[$route];
+// بررسی دسترسی ادمین
+if (isset($route_info['admin']) && $route_info['admin'] && !$auth->hasPermission('admin')) {
+    http_response_code(403);
+    require_once BASEPATH . '/pages/errors/403.php';
+    exit;
+}
+
+// اجرای فایل مربوطه
+require_once BASEPATH . '/' . $route_info['file'];
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">

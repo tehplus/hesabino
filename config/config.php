@@ -1,19 +1,34 @@
 <?php
 /**
- * پیکربندی اصلی برنامه حسابداری
+ * تنظیمات اصلی برنامه
  * 
  * @package HesabinoAccounting
  * @version 1.0.0
  */
 
-// جلوگیری از دسترسی مستقیم به این فایل
+// جلوگیری از دسترسی مستقیم
 if (!defined('BASEPATH')) {
-    die('دسترسی مستقیم به این فایل مجاز نیست.');
+    exit('No direct script access allowed');
 }
 
-// تنظیمات منطقه زمانی و زبان
+// تنظیم منطقه زمانی
 date_default_timezone_set('Asia/Tehran');
-setlocale(LC_ALL, 'fa_IR.utf8');
+
+// نمایش خطاها در محیط توسعه
+if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.localhost') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}
+
+// تنظیمات پایه سایت
+define('SITE_NAME', 'حسابینو');
+define('SITE_DESC', 'سیستم حسابداری آنلاین');
+define('SITE_URL', 'http://www.localhost/hesabino/');
+define('ADMIN_EMAIL', 'admin@hesabino.com');
 
 // تنظیمات دیتابیس
 define('DB_HOST', 'localhost');
@@ -21,114 +36,39 @@ define('DB_NAME', 'hesabino');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
-
-// مسیرهای اصلی
-define('BASEPATH', dirname(dirname(__FILE__)));
-define('URL', 'http://localhost/hesabino/'); // تغییر به آدرس اصلی سایت
-define('ASSETS', URL . 'assets/');
+define('DB_PREFIX', 'hb_');
 
 // تنظیمات امنیتی
-define('SECURE_SESSION', true);
-define('SESSION_NAME', 'HESABINO_SESSION');
-define('CSRF_TOKEN_NAME', 'hesabino_csrf_token');
+define('HASH_COST', 12); // هزینه هش کردن رمز عبور
+define('SESSION_LIFETIME', 7200); // طول عمر session به ثانیه (2 ساعت)
+define('CSRF_EXPIRY', 7200); // طول عمر توکن CSRF به ثانیه (2 ساعت)
+define('REMEMBER_COOKIE_NAME', 'hesabino_remember');
+define('REMEMBER_COOKIE_EXPIRY', 2592000); // 30 روز به ثانیه
 
-// تنظیمات عمومی
-define('SITE_NAME', 'حسابینو');
-define('SITE_DESC', 'سیستم حسابداری آنلاین');
-define('ADMIN_EMAIL', 'admin@example.com');
+// تنظیمات آپلود
+define('UPLOAD_PATH', BASEPATH . '/uploads/');
+define('ALLOWED_TYPES', [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+]);
+define('MAX_UPLOAD_SIZE', 10 * 1024 * 1024); // 10MB
 
-// تنظیمات حسابداری
-define('DEFAULT_CURRENCY', 'IRR');
-define('CURRENCY_SYMBOL', 'ریال');
-define('TAX_RATE', 0.09); // 9% مالیات بر ارزش افزوده
-define('INVOICE_PREFIX', 'INV-');
-define('TRANSACTION_PREFIX', 'TRN-');
-
-// تنظیمات نمایشی
+// تنظیمات نمایش
 define('ITEMS_PER_PAGE', 20);
 define('DATE_FORMAT', 'Y/m/d');
 define('TIME_FORMAT', 'H:i:s');
+define('DATETIME_FORMAT', 'Y/m/d H:i:s');
+define('THOUSAND_SEPARATOR', ',');
+define('DECIMAL_SEPARATOR', '.');
 
-// کلاس تنظیمات
-class Config {
-    private static $instance = null;
-    private $settings = [];
+// تنظیمات ایمیل
+define('MAIL_FROM', 'noreply@hesabino.com');
+define('MAIL_FROM_NAME', SITE_NAME);
+define('MAIL_REPLY_TO', 'support@hesabino.com');
 
-    private function __construct() {
-        // تنظیمات پیش‌فرض
-        $this->settings = [
-            'debug_mode' => true,
-            'maintenance_mode' => false,
-            'allow_registration' => true,
-            'email_verification' => true,
-            'auto_backup' => true,
-            'backup_frequency' => 'daily',
-            'log_level' => 'info',
-            'max_login_attempts' => 5,
-            'lockout_time' => 15, // دقیقه
-            'session_lifetime' => 3600, // ثانیه
-            'password_min_length' => 8,
-            'file_upload_max_size' => 5242880, // 5MB
-            'allowed_file_types' => ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx'],
-        ];
-    }
-
-    public static function getInstance() {
-        if (self::$instance == null) {
-            self::$instance = new Config();
-        }
-        return self::$instance;
-    }
-
-    public function get($key, $default = null) {
-        return isset($this->settings[$key]) ? $this->settings[$key] : $default;
-    }
-
-    public function set($key, $value) {
-        $this->settings[$key] = $value;
-    }
-
-    public function getAll() {
-        return $this->settings;
-    }
-}
-
-// تنظیمات اولیه برنامه
-function initializeApp() {
-    // تنظیمات سشن
-    if (SECURE_SESSION) {
-        ini_set('session.cookie_httponly', 1);
-        ini_set('session.use_only_cookies', 1);
-        ini_set('session.cookie_secure', 1);
-    }
-    
-    session_name(SESSION_NAME);
-    session_start();
-
-    // تنظیمات خطایابی
-    if (Config::getInstance()->get('debug_mode')) {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-    } else {
-        error_reporting(0);
-        ini_set('display_errors', 0);
-    }
-
-    // تنظیم هدرهای امنیتی
-    header('X-Frame-Options: SAMEORIGIN');
-    header('X-XSS-Protection: 1; mode=block');
-    header('X-Content-Type-Options: nosniff');
-    
-    if (!isset($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-
-    // بررسی حالت تعمیر
-    if (Config::getInstance()->get('maintenance_mode') && 
-        !isset($_SESSION['admin_logged_in'])) {
-        die('سایت در حال بروزرسانی است. لطفاً بعداً مراجعه کنید.');
-    }
-}
-
-// اجرای تنظیمات اولیه
-initializeApp();
+// پایان تنظیمات
+return true;

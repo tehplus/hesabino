@@ -313,3 +313,40 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\hesabino\index.php on line 87
+[29-Apr-2025 10:35:31 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 10:35:31 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:35:31 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:35:31 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\index.php on line 17
+[29-Apr-2025 10:35:31 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/templates/header.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\pages\login.php on line 47
+[29-Apr-2025 10:35:31 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/templates/header.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\pages\login.php:47
+Stack trace:
+#0 C:\xampp\htdocs\hesabino\index.php(87): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\hesabino\pages\login.php on line 47
+[29-Apr-2025 10:35:48 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:35:48 Asia/Tehran] PHP Fatal error:  Uncaught Error: Class "Config" not found in C:\xampp\htdocs\hesabino\includes\db.php:257
+Stack trace:
+#0 C:\xampp\htdocs\hesabino\includes\db.php(73): Database->logQuery('CREATE TABLE IF...', Array)
+#1 C:\xampp\htdocs\hesabino\includes\db.php(297): Database->query('CREATE TABLE IF...')
+#2 C:\xampp\htdocs\hesabino\includes\db.php(364): createRequiredTables()
+#3 C:\xampp\htdocs\hesabino\index.php(13): require_once('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 10:37:02 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:37:02 Asia/Tehran] PHP Fatal error:  Uncaught Error: Class "Config" not found in C:\xampp\htdocs\hesabino\includes\db.php:257
+Stack trace:
+#0 C:\xampp\htdocs\hesabino\includes\db.php(73): Database->logQuery('CREATE TABLE IF...', Array)
+#1 C:\xampp\htdocs\hesabino\includes\db.php(297): Database->query('CREATE TABLE IF...')
+#2 C:\xampp\htdocs\hesabino\includes\db.php(364): createRequiredTables()
+#3 C:\xampp\htdocs\hesabino\index.php(33): require_once('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 10:37:04 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:37:04 Asia/Tehran] PHP Fatal error:  Uncaught Error: Class "Config" not found in C:\xampp\htdocs\hesabino\includes\db.php:257
+Stack trace:
+#0 C:\xampp\htdocs\hesabino\includes\db.php(73): Database->logQuery('CREATE TABLE IF...', Array)
+#1 C:\xampp\htdocs\hesabino\includes\db.php(297): Database->query('CREATE TABLE IF...')
+#2 C:\xampp\htdocs\hesabino\includes\db.php(364): createRequiredTables()
+#3 C:\xampp\htdocs\hesabino\index.php(33): require_once('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown in C:\xampp\htdocs\hesabino\includes\db.php on line 257
