@@ -28,19 +28,31 @@ if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === 'www.
     error_reporting(0);
 }
 
-// لود کردن فایل‌های مورد نیاز
-require_once BASEPATH . '/includes/functions.php';
-require_once BASEPATH . '/includes/db.php';
-require_once BASEPATH . '/includes/auth.php';
 // تنظیمات session
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_secure', 0); // در حالت توسعه 0 و در حالت تولید 1
-// شروع session
+ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
+session_set_cookie_params([
+    'lifetime' => SESSION_LIFETIME,
+    'path' => '/',
+    'domain' => '',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
+
+// لود کردن فایل‌های مورد نیاز
+require_once BASEPATH . '/includes/functions.php';
+require_once BASEPATH . '/includes/db.php';
+require_once BASEPATH . '/includes/auth.php';
+
+
 session_start();
 
 // تنظیم session lifetime
-ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
+
 session_set_cookie_params(SESSION_LIFETIME);
 
 // دریافت مسیر درخواستی
@@ -168,6 +180,7 @@ require_once BASEPATH . '/' . $route_info['file'];
 
         body {
             font-family: 'Vazirmatn', sans-serif;
+            display: block;
         }
 
         /* نوار ناوبری */

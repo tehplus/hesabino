@@ -25,121 +25,336 @@
     font-style: normal;
     font-display: swap;
 }
-body*{
-    font-family: 'Anjoman Max';
-}
+/**
+ * استایل‌های اصلی برنامه
+ */
 
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #34495e;
-    --accent-color: #3498db;
-    --success-color: #2ecc71;
-    --warning-color: #f1c40f;
-    --danger-color: #e74c3c;
-    --light-bg: #ecf0f1;
-    --dark-text: #2c3e50;
-    --light-text: #ffffff;
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #48bb78;
+    --danger-color: #e53e3e;
+    --warning-color: #ecc94b;
+    --info-color: #4299e1;
+    --dark-color: #2d3748;
+    --light-color: #f7fafc;
+    --gray-color: #718096;
 }
 
+/* تنظیمات پایه */
 body {
     font-family: 'Anjoman Max';
-    background-color: var(--light-bg);
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.7;
 }
 
-/* Sidebar Styles */
-.sidebar {
-    background-color: var(--primary-color);
+
+
+/* نوار ناوبری */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+/* صفحات احراز هویت */
+.auth-wrapper {
     min-height: 100vh;
-    padding: 20px 0;
-    position: fixed;
-    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
 }
 
-.sidebar .nav-link {
-    color: var(--light-text);
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 5px;
+.auth-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+.auth-card .card-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-card .logo {
+    display: block;
+    margin: 0 auto 2rem;
+    height: 60px;
+}
+
+/* فرم‌ها */
+.form-control {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.input-group-text {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+}
+
+/* دکمه‌ها */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
     transition: all 0.3s ease;
 }
 
-.sidebar .nav-link:hover {
-    background-color: var(--accent-color);
-}
-
-.sidebar .nav-link i {
-    margin-left: 10px;
-}
-
-/* Main Content Styles */
-.main-content {
-    margin-right: 16.666667%;
-    padding: 20px;
-}
-
-/* Card Styles */
-.card {
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-    border: none;
-}
-
-.card-header {
-    background-color: var(--primary-color);
-    color: var(--light-text);
-    border-radius: 10px 10px 0 0 !important;
-    padding: 15px;
-}
-
-/* Button Styles */
 .btn-primary {
-    background-color: var(--accent-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
 }
 
-/* Table Styles */
+.btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-color: transparent;
+}
+
+/* کارت‌ها */
+.card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* جداول */
 .table {
-    background-color: white;
-    border-radius: 10px;
+    background: white;
+    border-radius: 1rem;
     overflow: hidden;
 }
 
 .table thead th {
-    background-color: var(--primary-color);
-    color: var(--light-text);
-    border: none;
+    background: var(--light-color);
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 600;
 }
 
-/* Form Styles */
-.form-control {
-    border-radius: 5px;
-    padding: 10px;
-    border: 1px solid #ddd;
+.table tbody tr:hover {
+    background-color: #f8fafc;
 }
 
-.form-control:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+/* نشانگر وضعیت */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
-/* Alert Styles */
+.status-badge.active {
+    background-color: rgba(72, 187, 120, 0.1);
+    color: var(--success-color);
+}
+
+.status-badge.inactive {
+    background-color: rgba(229, 62, 62, 0.1);
+    color: var(--danger-color);
+}
+
+/* پیام‌های هشدار */
 .alert {
-    border-radius: 5px;
     border: none;
-    padding: 15px;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
 }
 
-/* Badge Styles */
-.badge {
-    padding: 8px 12px;
-    border-radius: 20px;
+.alert-success {
+    background-color: rgba(72, 187, 120, 0.1);
+    color: var(--success-color);
+}
+
+.alert-danger {
+    background-color: rgba(229, 62, 62, 0.1);
+    color: var(--danger-color);
+}
+
+.alert-warning {
+    background-color: rgba(236, 201, 75, 0.1);
+    color: var(--warning-color);
+}
+
+/* نوار پیشرفت */
+.progress {
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.3s ease;
+}
+
+/* دکمه برگشت به بالا */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    background: var(--secondary-color);
+}
+
+/* انیمیشن‌ها */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* لودینگ */
+.loading-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* صفحه ورود و ثبت‌نام */
+.login-page, .register-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header img {
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.auth-form .form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.password-requirements {
+    font-size: 0.875rem;
+    color: var(--gray-color);
+}
+
+.requirement-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.requirement-item i {
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* رسپانسیو */
+@media (max-width: 768px) {
+    .auth-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+    
+    .form-control {
+        padding: 0.5rem 0.75rem;
+    }
 }

@@ -94,6 +94,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
         body {
             font-family: 'Vazirmatn', sans-serif;
+            display: block;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
             display: flex;
