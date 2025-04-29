@@ -350,3 +350,85 @@ Stack trace:
 #3 C:\xampp\htdocs\hesabino\index.php(33): require_once('C:\\xampp\\htdocs...')
 #4 {main}
   thrown in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 10:41:58 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 10:41:58 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:41:58 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 10:41:58 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 10:41:58 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 10:41:58 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:126
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 10:52:20 Asia/Tehran] PHP Parse error:  Unclosed '{' on line 849 in C:\xampp\htdocs\hesabino\includes\functions.php on line 860
+[29-Apr-2025 10:52:26 Asia/Tehran] PHP Parse error:  Unclosed '{' on line 849 in C:\xampp\htdocs\hesabino\includes\functions.php on line 859
+[29-Apr-2025 10:52:53 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 10:52:53 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:52:53 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 10:52:53 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 10:52:53 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 10:52:53 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:126
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 10:54:35 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 10:54:35 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:54:35 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 10:54:35 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 10:54:35 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 10:54:35 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:126
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 11:04:00 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 11:04:00 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 706
+[29-Apr-2025 11:04:00 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 11:04:00 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 11:04:00 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 11:04:00 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:126
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 11:05:20 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 11:05:20 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 706
+[29-Apr-2025 11:05:20 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 11:05:20 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 11:05:20 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 11:05:20 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:126
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 11:05:57 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 11:05:57 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 706
+[29-Apr-2025 11:05:57 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 11:05:57 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 11:05:57 Asia/Tehran] SQLSTATE[HY000] [1049] Unknown database 'hesabino'
+[29-Apr-2025 11:05:57 Asia/Tehran] PHP Fatal error:  Uncaught Exception: خطا در اتصال به پایگاه داده in C:\xampp\htdocs\hesabino\includes\db.php:38
+Stack trace:
+#0 C:\xampp\htdocs\hesabino\includes\db.php(47): Database->__construct()
+#1 C:\xampp\htdocs\hesabino\includes\auth.php(24): Database::getInstance()
+#2 C:\xampp\htdocs\hesabino\includes\auth.php(85): Auth->__construct()
+#3 C:\xampp\htdocs\hesabino\index.php(109): Auth::getInstance()
+#4 {main}
+  thrown in C:\xampp\htdocs\hesabino\includes\db.php on line 38
+[29-Apr-2025 11:19:36 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 11:19:36 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 706
+[29-Apr-2025 11:19:36 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 11:19:36 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 11:19:36 Asia/Tehran] SQLSTATE[HY000] [1049] Unknown database 'hesabino'
+[29-Apr-2025 11:19:36 Asia/Tehran] PHP Fatal error:  Uncaught Exception: خطا در اتصال به پایگاه داده in C:\xampp\htdocs\hesabino\includes\db.php:38
+Stack trace:
+#0 C:\xampp\htdocs\hesabino\includes\db.php(47): Database->__construct()
+#1 C:\xampp\htdocs\hesabino\includes\auth.php(24): Database::getInstance()
+#2 C:\xampp\htdocs\hesabino\includes\auth.php(85): Auth->__construct()
+#3 C:\xampp\htdocs\hesabino\index.php(109): Auth::getInstance()
+#4 {main}
+  thrown in C:\xampp\htdocs\hesabino\includes\db.php on line 38
+[29-Apr-2025 11:21:06 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 257
+[29-Apr-2025 11:21:06 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 706
+[29-Apr-2025 11:21:06 Asia/Tehran] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 40
+[29-Apr-2025 11:21:06 Asia/Tehran] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\hesabino\index.php on line 41
+[29-Apr-2025 11:21:06 Asia/Tehran] PHP Warning:  require_once(C:\xampp\htdocs\hesabino/pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 126
+[29-Apr-2025 11:21:06 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\hesabino/pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:126
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 126
