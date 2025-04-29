@@ -273,3 +273,43 @@ Stack trace:
 [27-Apr-2025 22:22:30 Europe/Berlin] PHP Warning:  include(): Failed opening 'includes/header.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php on line 17
 [27-Apr-2025 22:22:30 Europe/Berlin] PHP Warning:  include(includes/footer.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 42
 [27-Apr-2025 22:22:30 Europe/Berlin] PHP Warning:  include(): Failed opening 'includes/footer.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php on line 42
+[29-Apr-2025 01:34:46 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 01:34:46 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 01:34:46 Asia/Tehran] PHP Warning:  error_log(C:\xampp\htdocs\hesabino/logs/db_errors.log): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\includes\db.php on line 250
+[29-Apr-2025 01:34:58 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 01:34:58 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 01:34:58 Asia/Tehran] PHP Warning:  error_log(C:\xampp\htdocs\hesabino/logs/db_errors.log): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\includes\db.php on line 250
+[29-Apr-2025 09:54:59 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 09:54:59 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 09:54:59 Asia/Tehran] PHP Warning:  error_log(C:\xampp\htdocs\hesabino/logs/db_errors.log): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\includes\db.php on line 250
+[29-Apr-2025 09:55:14 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 09:55:14 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 09:55:14 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\index.php on line 16
+[29-Apr-2025 09:57:25 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 09:57:25 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 09:57:25 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\index.php on line 16
+[29-Apr-2025 09:57:39 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 09:57:39 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 09:57:39 Asia/Tehran] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp\htdocs\hesabino\includes\send-contact.php on line 30
+[29-Apr-2025 09:57:39 Asia/Tehran] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp\htdocs\hesabino\includes\send-contact.php on line 32
+[29-Apr-2025 09:57:39 Asia/Tehran] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp\htdocs\hesabino\includes\send-contact.php on line 33
+[29-Apr-2025 10:18:51 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 10:18:51 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:18:51 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:18:51 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\login.php on line 17
+[29-Apr-2025 10:20:43 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 10:20:43 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:20:43 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:20:43 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\login.php on line 17
+[29-Apr-2025 10:20:48 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 10:20:48 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:20:48 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\index.php on line 16
+[29-Apr-2025 10:31:33 Asia/Tehran] PHP Warning:  Constant BASEPATH already defined in C:\xampp\htdocs\hesabino\config\config.php on line 26
+[29-Apr-2025 10:31:33 Asia/Tehran] PHP Warning:  The magic method Database::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\db.php on line 289
+[29-Apr-2025 10:31:33 Asia/Tehran] PHP Warning:  The magic method Auth::__wakeup() must have public visibility in C:\xampp\htdocs\hesabino\includes\auth.php on line 514
+[29-Apr-2025 10:31:33 Asia/Tehran] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\hesabino\index.php on line 17
+[29-Apr-2025 10:31:33 Asia/Tehran] PHP Warning:  require_once(pages/home.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\hesabino\index.php on line 87
+[29-Apr-2025 10:31:33 Asia/Tehran] PHP Fatal error:  Uncaught Error: Failed opening required 'pages/home.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\hesabino\index.php:87
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\hesabino\index.php on line 87
